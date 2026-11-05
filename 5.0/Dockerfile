@@ -45,3 +45,9 @@ ENTRYPOINT ["docker-entrypoint.sh"]
 
 EXPOSE 80
 CMD ["/opt/rt/sbin/rt-server"]
+
+RUN apt-get update && apt-get -y upgrade && apt-get -y install --no-install-recommends \
+    msmtp-mta \
+  && rm -rf /var/lib/apt/lists/*
+
+COPY etc/msmtprc /etc/msmtprc
